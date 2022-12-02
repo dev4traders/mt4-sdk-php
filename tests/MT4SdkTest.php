@@ -21,8 +21,6 @@ class MT4SdkTest extends TestCase
 
     public function test_ping()
     {
-        echo $_ENV['MT4_API_TOKEN'];
-        echo $_ENV['MT4_API_ENDPOINT'];
         $manager = new Manager($_ENV['MT4_API_TOKEN'], $_ENV['MT4_API_ENDPOINT'], $http = Mockery::mock(Client::class));
 
         $http->shouldReceive('request')->once()->with('GET', 'ping', [])->andReturn(
