@@ -21,6 +21,8 @@ class MT4SdkTest extends TestCase
 
     public function test_ping()
     {
+        echo $_ENV['MT4_API_TOKEN'];
+        echo $_ENV['MT4_API_ENDPOINT'];
         $manager = new Manager($_ENV['MT4_API_TOKEN'], $_ENV['MT4_API_ENDPOINT'], $http = Mockery::mock(Client::class));
 
         $http->shouldReceive('request')->once()->with('GET', 'ping', [])->andReturn(
@@ -30,74 +32,74 @@ class MT4SdkTest extends TestCase
         $this->assertNotEmpty(1, $manager->ping());
     }
 
-    public function test_getting_accounts()
-    {
-        $manager = new Manager($_ENV['MT4_API_TOKEN'], $_ENV['MT4_API_ENDPOINT'], $http = Mockery::mock(Client::class));
+    // public function test_getting_accounts()
+    // {
+    //     $manager = new Manager($_ENV['MT4_API_TOKEN'], $_ENV['MT4_API_ENDPOINT'], $http = Mockery::mock(Client::class));
 
-        $http->shouldReceive('request')->once()->with('GET', 'accounts', [])->andReturn(
-            new Response(200, [], '{"users": [{"key": "value"}]}')
-        );
+    //     $http->shouldReceive('request')->once()->with('GET', 'accounts', [])->andReturn(
+    //         new Response(200, [], '{"users": [{"key": "value"}]}')
+    //     );
 
-        $this->assertCount(1, $manager->getAccounts());
-    }
+    //     $this->assertCount(1, $manager->getAccounts());
+    // }
 
-    public function test_updating_account()
-    {
-        $manager = new Manager($_ENV['MT4_API_TOKEN'], $_ENV['MT4_API_ENDPOINT'], $http = Mockery::mock(Client::class));
+    // public function test_updating_account()
+    // {
+    //     $manager = new Manager($_ENV['MT4_API_TOKEN'], $_ENV['MT4_API_ENDPOINT'], $http = Mockery::mock(Client::class));
 
-        $http->shouldReceive('request')->once()->with('PUT', 'account/update', [
-            'json' => ['name' => 'test'],
-        ])->andReturn(
-            new Response(200, [], '{"name": "test"}')
-        );
+    //     $http->shouldReceive('request')->once()->with('PUT', 'account/update', [
+    //         'json' => ['name' => 'test'],
+    //     ])->andReturn(
+    //         new Response(200, [], '{"name": "test"}')
+    //     );
 
-        $this->assertSame(['foo.com'], $manager->updateAccount(123, [
-            'name' => 'test',
-        ])->account);
-    }
+    //     $this->assertSame(['foo.com'], $manager->updateAccount(123, [
+    //         'name' => 'test',
+    //     ])->account);
+    // }
 
-    public function test_handling_validation_errors()
-    {
-        $manager = new Manager($_ENV['MT4_API_TOKEN'], $_ENV['MT4_API_ENDPOINT'], $http = Mockery::mock(Client::class));
+    // public function test_handling_validation_errors()
+    // {
+    //     $manager = new Manager($_ENV['MT4_API_TOKEN'], $_ENV['MT4_API_ENDPOINT'], $http = Mockery::mock(Client::class));
 
-        $http->shouldReceive('request')->once()->with('PUT', 'account/update', [])->andReturn(
-            new Response(422, [], '{"name": ["The name is required."]}')
-        );
+    //     $http->shouldReceive('request')->once()->with('PUT', 'account/update', [])->andReturn(
+    //         new Response(422, [], '{"name": ["The name is required."]}')
+    //     );
 
-        try {
-            $manager->updateAccount(123, []);
-        } catch (ValidationException $e) {
-        }
+    //     try {
+    //         $manager->updateAccount(123, []);
+    //     } catch (ValidationException $e) {
+    //     }
 
-        $this->assertEquals(['name' => ['The name is required.']], $e->errors());
-    }
+    //     $this->assertEquals(['name' => ['The name is required.']], $e->errors());
+    // }
 
-    public function test_handling_404_errors()
-    {
-        $this->expectException(NotFoundException::class);
+    // public function test_handling_404_errors()
+    // {
+    //     $this->expectException(NotFoundException::class);
 
-        $manager = new Manager($_ENV['MT4_API_TOKEN'], $_ENV['MT4_API_ENDPOINT'], $http = Mockery::mock(Client::class));
+    //     $manager = new Manager($_ENV['MT4_API_TOKEN'], $_ENV['MT4_API_ENDPOINT'], $http = Mockery::mock(Client::class));
 
-        $http->shouldReceive('request')->once()->with('GET', 'account', [])->andReturn(
-            new Response(404)
-        );
+    //     $http->shouldReceive('request')->once()->with('GET', 'account', [])->andReturn(
+    //         new Response(404)
+    //     );
 
-        $manager->getAccounts();
-    }
+    //     $manager->getAccounts();
+    // }
 
-    public function test_handling_failed_action_errors()
-    {
-        $manager = new Manager($_ENV['MT4_API_TOKEN'], $_ENV['MT4_API_ENDPOINT'], $http = Mockery::mock(Client::class));
+    // public function test_handling_failed_action_errors()
+    // {
+    //     $manager = new Manager($_ENV['MT4_API_TOKEN'], $_ENV['MT4_API_ENDPOINT'], $http = Mockery::mock(Client::class));
 
-        $http->shouldReceive('request')->once()->with('GET', 'account', [])->andReturn(
-            new Response(400, [], 'Error!')
-        );
+    //     $http->shouldReceive('request')->once()->with('GET', 'account', [])->andReturn(
+    //         new Response(400, [], 'Error!')
+    //     );
 
-        try {
-            $manager->getAccounts();
-        } catch (FailedActionException $e) {
-            $this->assertSame('Error!', $e->getMessage());
-        }
-    }
+    //     try {
+    //         $manager->getAccounts();
+    //     } catch (FailedActionException $e) {
+    //         $this->assertSame('Error!', $e->getMessage());
+    //     }
+    // }
 
 }

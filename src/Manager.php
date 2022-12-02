@@ -43,7 +43,9 @@ class Manager
 
     public function ping()
     {
-        return $this->get("ping");
+        $this->get("ping");
+
+        return true;
     }
 
 }

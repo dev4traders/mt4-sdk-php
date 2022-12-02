@@ -41,7 +41,7 @@ trait MakesHttpRequests
         $response = $this->client->request(
             $verb,
             $uri,
-            empty($payload) ? [] : ['form_params' => $payload]
+            empty($payload) ? [] : ['json' => $payload]
         );
 
         if (! $this->isSuccessful($response)) {

@@ -3,42 +3,41 @@
 namespace D4T\MT4Sdk\Actions;
 
 use D4T\MT4Sdk\Resources\Account;
+use Illuminate\Support\Collection;
 
 trait ManagesAccounts
 {
-    public function getAccounts()
+    public function listAccountLogins() :Collection
     {
         $accounts = $this->get("users");
 
-        return [];
-
-        //return new Account($attributes, $this);
+        return collect($accounts);
     }
 
     public function getAccount(int $login): Account
     {
-        $attributes = $this->get("user/{$login}")['data'];
+        $attributes = $this->get("user/{$login}");
 
         return new Account($attributes, $this);
     }
 
     public function createAccount(array $data): Account
     {
-        $attributes = $this->post('user/add', $data);
+        $attributes = $this->post('user/add', $data)['user'];
 
         return new Account($attributes, $this);
     }
 
     public function updateAccount(int $login, array $data): Account
     {
-        $attributes = $this->put("user/update/{$login}", $data)['data'];
+        $attributes = $this->post("user/update/{$login}", $data)['user'];
 
         return new Account($attributes, $this);
     }
 
-    public function deleteAccount(int $login): void
+    public function deleteAccount(int $login)
     {
-        $this->delete("user/{$login}");
+        return $this->delete("user/{$login}");
     }
 
 }
