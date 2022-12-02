@@ -6,12 +6,8 @@ use Exception;
 
 class InvalidDataException extends Exception
 {
-    public array $errors = [];
-
-    public function __construct(array $errors)
+    public function __construct(string $error)
     {
-        $this->errors = $errors;
-
-        parent::__construct('The given data failed to pass validation. '.print_r($this->errors, true));
+        parent::__construct($error);
     }
 }
