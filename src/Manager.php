@@ -8,7 +8,7 @@ use D4T\MT4Sdk\Actions\ManagesAccounts;
 use D4T\MT4Sdk\Actions\ManagesTrades;
 use D4T\MT4Sdk\Actions\ManagesSymbols;
 
-class Mailcoach
+class Manager
 {
     use MakesHttpRequests;
     use ManagesAccounts;
@@ -38,6 +38,6 @@ class Mailcoach
 
     public function endpoint(): string
     {
-        return $this->mailcoachEndpoint;
+        return $this->apiEndpoint;
     }
 }

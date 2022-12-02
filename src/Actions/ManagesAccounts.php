@@ -6,30 +6,39 @@ use D4T\MT4Sdk\Resources\Account;
 
 trait ManagesAccounts
 {
-    public function account(int $login): Account
+    public function getAccounts()
     {
-        $attributes = $this->get("accounts/{$login}")['data'];
+        $accounts = $this->get("users");
+
+        return [];
+
+        //return new Account($attributes, $this);
+    }
+
+    public function getAccount(int $login): Account
+    {
+        $attributes = $this->get("user/{$login}")['data'];
 
         return new Account($attributes, $this);
     }
 
     public function createAccount(array $data): Account
     {
-        $attributes = $this->post('accounts', $data);
+        $attributes = $this->post('user/add', $data);
 
         return new Account($attributes, $this);
     }
 
     public function updateAccount(int $login, array $data): Account
     {
-        $attributes = $this->put("accounts/{$login}", $data)['data'];
+        $attributes = $this->put("user/update/{$login}", $data)['data'];
 
         return new Account($attributes, $this);
     }
 
     public function deleteAccount(int $login): void
     {
-        $this->delete("accounts/{$login}");
+        $this->delete("user/{$login}");
     }
 
 }
