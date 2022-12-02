@@ -4,7 +4,6 @@ namespace Tests;
 
 use D4T\MT4Sdk\Exceptions\FailedActionException;
 use D4T\MT4Sdk\Exceptions\InvalidDataException;
-use D4T\MT4Sdk\Exceptions\NotFoundException;
 use D4T\MT4Sdk\Manager;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
