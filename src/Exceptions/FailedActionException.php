@@ -4,7 +4,7 @@ namespace D4T\MT4Sdk\Exceptions;
 
 use Exception;
 
-class ActionFailed extends Exception
+class FailedActionException extends Exception
 {
     public function __construct(string $message)
     {

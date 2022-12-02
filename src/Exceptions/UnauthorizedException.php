@@ -4,6 +4,6 @@ namespace D4T\MT4Sdk\Exceptions;
 
 use Exception;
 
-class Unauthorized extends Exception
+class UnauthorizedException extends Exception
 {
 }

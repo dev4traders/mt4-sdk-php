@@ -40,4 +40,10 @@ class Manager
     {
         return $this->apiEndpoint;
     }
+
+    public function ping()
+    {
+        return $this->get("ping");
+    }
+
 }

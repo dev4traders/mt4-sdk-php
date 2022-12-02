@@ -4,7 +4,7 @@ namespace D4T\MT4Sdk\Exceptions;
 
 use Exception;
 
-class InvalidData extends Exception
+class InvalidDataException extends Exception
 {
     public array $errors = [];
 

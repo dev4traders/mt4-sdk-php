@@ -4,10 +4,10 @@ namespace D4T\MT4Sdk;
 
 use Exception;
 use Psr\Http\Message\ResponseInterface;
-use D4T\MT4Sdk\Exceptions\ActionFailed;
-use D4T\MT4Sdk\Exceptions\InvalidData;
-use D4T\MT4Sdk\Exceptions\ResourceNotFound;
-use D4T\MT4Sdk\Exceptions\Unauthorized;
+use D4T\MT4Sdk\Exceptions\FailedActionException;
+use D4T\MT4Sdk\Exceptions\InvalidDataException;
+use D4T\MT4Sdk\Exceptions\UnauthorizedException;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 trait MakesHttpRequests
 {
@@ -81,19 +81,19 @@ trait MakesHttpRequests
     protected function handleRequestError(ResponseInterface $response): void
     {
         if ($response->getStatusCode() === 422) {
-            throw new InvalidData(json_decode((string) $response->getBody(), true));
+            throw new InvalidDataException(json_decode((string) $response->getBody(), true));
         }
 
         if ($response->getStatusCode() === 404) {
-            throw new ResourceNotFound();
+            throw new ResourceNotFoundException();
         }
 
         if ($response->getStatusCode() === 400) {
-            throw new ActionFailed((string) $response->getBody());
+            throw new FailedActionException((string) $response->getBody());
         }
 
         if ($response->getStatusCode() === 401) {
-            throw new Unauthorized((string) $response->getBody());
+            throw new UnauthorizedException((string) $response->getBody());
         }
 
         throw new Exception((string) $response->getBody());

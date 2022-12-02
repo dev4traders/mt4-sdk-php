@@ -27,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "D4T\\MT4Sdk\\": "src"
+            "D4T\\MT4Sdk\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "D4T\\MT4Sdk\\Tests\\": "tests"
+            "D4T\\MT4Sdk\\Tests\\": "tests/"
         }
     },
     "config": {

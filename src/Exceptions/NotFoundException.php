@@ -4,7 +4,7 @@ namespace D4T\MT4Sdk\Exceptions;
 
 use Exception;
 
-class ResourceNotFound extends Exception
+class NotFoundException extends Exception
 {
     public function __construct()
     {
