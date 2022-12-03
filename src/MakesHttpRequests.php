@@ -2,15 +2,30 @@
 
 namespace D4T\MT4Sdk;
 
-use Exception;
-use Psr\Http\Message\ResponseInterface;
 use D4T\MT4Sdk\Exceptions\FailedActionException;
 use D4T\MT4Sdk\Exceptions\InvalidDataException;
 use D4T\MT4Sdk\Exceptions\UnauthorizedException;
+use Exception;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 trait MakesHttpRequests
 {
+
+    private int $timeout = 30;
+
+    public function setTimeout($timeout)
+    {
+        $this->timeout = $timeout;
+
+        return $this;
+    }
+
+    public function getTimeout()
+    {
+        return $this->timeout;
+    }
+
     public function get(string $uri)
     {
         return $this->request('GET', $uri);
@@ -38,10 +53,15 @@ trait MakesHttpRequests
 
     public function request(string $verb, string $uri, array $payload = []): mixed
     {
+        $options['timeout'] = $this->timeout;
+
+        if(!empty($payload))
+            $options['json'] = $payload;
+
         $response = $this->client->request(
             $verb,
             $uri,
-            empty($payload) ? [] : ['json' => $payload]
+            $options
         );
 
         if (! $this->isSuccessful($response)) {
@@ -98,4 +118,5 @@ trait MakesHttpRequests
 
         throw new Exception((string) $response->getBody());
     }
+
 }
