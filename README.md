@@ -1,4 +1,11 @@
 # An SDK for using the Metatrader4 API in PHP
+<!-- BADGES_START -->
+[![PHP Version][badge-php]][php]
+
+[badge-php]: https://img.shields.io/packagist/php-v/juststeveking/php-sdk.svg?style=flat-square
+[php]: https://php.net
+<!-- BADGES_END -->
+
 
 Here are a few examples:
 
