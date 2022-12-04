@@ -1,7 +1,11 @@
 # An SDK for using the Metatrader4 API in PHP
 <!-- BADGES_START -->
+[![Latest Version][badge-release]][packagist]
 [![PHP Version][badge-php]][php]
 [![Total Downloads][badge-downloads]][downloads]
+
+[badge-release]: https://img.shields.io/packagist/v/dev4traders/mt4-sdk-php.svg?style=flat-square&label=release
+[packagist]: https://packagist.org/packages/dev4traders/mt4-sdk-php
 
 [badge-php]: https://img.shields.io/packagist/php-v/dev4traders/mt4-sdk-php.svg?style=flat-square
 [php]: https://php.net
