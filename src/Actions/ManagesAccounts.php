@@ -3,15 +3,14 @@
 namespace D4T\MT4Sdk\Actions;
 
 use D4T\MT4Sdk\Resources\Account;
-use Illuminate\Support\Collection;
 
 trait ManagesAccounts
 {
-    public function listAccountLogins() :Collection
+    public function listAccountLogins()
     {
         $accounts = $this->get("users");
 
-        return collect($accounts);
+        return $accounts;
     }
 
     public function getAccount(int $login): Account
@@ -35,9 +34,11 @@ trait ManagesAccounts
         return new Account($attributes, $this);
     }
 
-    public function deleteAccount(int $login)
+    public function deleteAccount(int $login) : string
     {
-        return $this->delete("user/{$login}");
+        $this->delete("user/{$login}");
+
+        return true;
     }
 
 }

@@ -41,7 +41,7 @@ class Manager
         return $this->apiEndpoint;
     }
 
-    public function ping()
+    public function ping() : bool
     {
         $this->get("ping");
 
