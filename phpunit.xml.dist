@@ -3,20 +3,26 @@
          backupStaticAttributes="false"
          bootstrap="vendor/autoload.php"
          colors="true"
-         convertDeprecationsToExceptions="true"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
 >
+    <php>
+        <env name="MT4_MANAGER_API_TOKEN" value=""/>
+        <env name="MT4_MANAGER_API_ENDPOINT" value=""/>
+        <env name="MT4_TERMINAL_API_TOKEN" value=""/>
+        <env name="MT4_TERMINAL_API_ENDPOINT" value=""/>
+    </php>
     <testsuites>
-        <testsuite name="MT4 SDK Test Suite">
-            <directory suffix="Test.php">./tests</directory>
+        <testsuite name="Laravel MT4 SDk Test Suite">
+            <directory suffix="Test.php">./tests/</directory>
         </testsuite>
     </testsuites>
-    <php>
-        <env name="MT4_API_TOKEN" value="1"/>
-        <env name="MT4_API_ENDPOINT" value="http://mt4-api.dev4traders.com/v1/"/>
-    </php>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
 </phpunit>

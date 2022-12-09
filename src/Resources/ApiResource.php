@@ -2,19 +2,19 @@
 
 namespace D4T\MT4Sdk\Resources;
 
-use D4T\MT4Sdk\Manager;
+use D4T\MT4Sdk\Terminal;
 
 class ApiResource
 {
     public array $attributes = [];
 
-    protected ?Manager $manager;
+    protected ?Terminal $terminal;
 
-    public function __construct(array $attributes, Manager $manager = null)
+    public function __construct(array $attributes, Terminal $terminal = null)
     {
         $this->attributes = $attributes;
 
-        $this->manager = $manager;
+        $this->terminal = $terminal;
 
         $this->fill();
     }
