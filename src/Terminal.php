@@ -18,7 +18,7 @@ class Terminal
     ) {
         $this->client ??= new Client([
             'http_errors' => false,
-            'base_uri' => $this->apiEndpoint.'/',
+            'base_uri' => $this->apiEndpoint.'/terminal/',
             'headers' => [
                 'Authorization' => "Bearer {$this->apiToken}",
                 'Accept' => 'application/json',
