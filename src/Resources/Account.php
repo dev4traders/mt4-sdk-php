@@ -10,6 +10,8 @@ class Account extends ApiResource
 
     public string $email;
 
+    public string $password;
+
     public function save(): self
     {
         $account = $this->manager->updateAccount($this->login, $this->toArray());

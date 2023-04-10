@@ -11,7 +11,6 @@ use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 trait MakesHttpRequests
 {
-
     private int $timeout = 30;
 
     public function setTimeout($timeout)

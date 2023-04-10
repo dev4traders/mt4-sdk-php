@@ -2,10 +2,11 @@
 
 namespace D4T\MT4Sdk;
 
-use D4T\MT4Sdk\Requests\TerminalAccountCreateRequest;
-use D4T\MT4Sdk\Resources\TerminalAccountCredentails;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use Illuminate\Support\Facades\Http;
+use D4T\MT4Sdk\Resources\TerminalAccountCredentails;
+use D4T\MT4Sdk\Requests\TerminalAccountCreateRequest;
 
 class Terminal
 {
@@ -51,11 +52,18 @@ class Terminal
         return new TerminalAccountCredentails($attributes, $this);
     }
 
-    public function parseSrv(string $srvFileData): mixed
+    public function parseSrv(string $srvFileData, string $name): mixed
     {
-        // $attributes = $this->post('srv-parse', $srvFileData);
 
-        // return new TerminalAccountCredentails($attributes, $this);
+        $url = $this->apiEndpoint.'/terminal/srv-parse';
+
+        $response = Http::attach(
+            'attachment', $srvFileData, $name.'.srv'
+        )->post($url);
+
+        if ($response->ok()) {
+            return $response->body();
+        }
 
         return null;
     }

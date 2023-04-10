@@ -12,8 +12,8 @@ class Manager
 {
     use MakesHttpRequests;
     use ManagesAccounts;
-    use ManagesTrades;
-    use ManagesSymbols;
+    // use ManagesTrades;
+    // use ManagesSymbols;
 
     public function __construct(
         public string $apiToken,
